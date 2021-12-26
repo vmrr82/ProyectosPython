@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import json
 
 
 class vehiculosRobados:
@@ -11,7 +12,7 @@ class vehiculosRobados:
     def rumania(self):
     
         cookies = dict(cookies_are='working')
-        r = requests.get(f'https://www.politiaromana.ro/ro/auto-furate?marca=&serie={self.bastidor}&categorie=',cookies=cookies)
+        r = requests.get(f'https://www.politiaromana.ro/ro/auto-furate?marca=&serie={self.bastidor}&categorie=',cookies=cookies,timeout=3)
         soup = BeautifulSoup(r.text,'html.parser')
         while True:
             try:
@@ -26,7 +27,7 @@ class vehiculosRobados:
 
     def hungria(self):
         cookies = dict(cookies_are='working')
-        r = requests.get(f'http://www.police.hu/hu/koral/kozutijarmu-korozesek?ent_jarmu_kozuti_alvazszam={self.bastidor}&ent_jarmu_kozuti_rendszam=&ent_jarmu_kozuti_kore_szerv=All&ent_jarmu_kozuti_kori_szerv=All&ent_jarmu_kozuti_fajta=All&ent_jarmu_kozuti_gyartmany=All&ent_jarmu_kozuti_forgalomba_helyezo_orszag=All&ent_jarmu_kozuti_szin=All',cookies=cookies)
+        r = requests.get(f'http://www.police.hu/hu/koral/kozutijarmu-korozesek?ent_jarmu_kozuti_alvazszam={self.bastidor}&ent_jarmu_kozuti_rendszam=&ent_jarmu_kozuti_kore_szerv=All&ent_jarmu_kozuti_kori_szerv=All&ent_jarmu_kozuti_fajta=All&ent_jarmu_kozuti_gyartmany=All&ent_jarmu_kozuti_forgalomba_helyezo_orszag=All&ent_jarmu_kozuti_szin=All',cookies=cookies,timeout=3)
         soup = BeautifulSoup(r.text,'html.parser')
         
         while True:
@@ -43,11 +44,45 @@ class vehiculosRobados:
             except(AttributeError,TypeError):
                 print("-----HUNGRIA------VEHÍCULO NO ENCONTRADO-----")
                 break
+
+    def eslovenia(self):
         
-#Bastidor RUMANIA ---'WADKJNCKJDSNC'
-#Bastidor HUNGRIA ---'TSMMMA53S00189267'      
+        with open('Policia/ukrvoz.json') as file:
+                data = json.load(file).values()
+                for lista in data:
+                    for item in lista:
+                        marca = item['znamka']
+                        modelo = item['tip']
+                        bastidorCoche = item['sasija']
+                        color = item['barva']
+                        fecha = item['datumodvzema']
+                        
+                        if (self.bastidor in bastidorCoche):
+                                try:
+                                        print('-----ESLOVENIA------VEHÍCULO ENCONTRADO-----')
+                                        print("\nBASTIDOR: " + self.bastidor + "\nMARCA: " + marca + "\nCOLOR: " + color + "\nFECHA: " + fecha)
+                                        
+                                        
+                                except KeyError as e:
+                                        print("-----ESLOVENIA------VEHÍCULO NO ENCONTRADO-----",e)
+                                        break
+
+                        
+        
+        
+        
+                
+        
+
+
+
+#BASTIDORES DE PRUEBA        
+#RUMANIA ---'WADKJNCKJDSNC'
+#HUNGRIA ---'TSMMMA53S00189267'
+#ESLOVENIA --- 'ZZ1A8GBAP00842109'      
 
     
-buscar = vehiculosRobados('TSMMMA53S00189267')
+buscar = vehiculosRobados('LBMC25C0900008571')
 buscar.rumania()
 buscar.hungria()
+buscar.eslovenia()
