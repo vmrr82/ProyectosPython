@@ -82,7 +82,7 @@ class vehiculosRobados:
 #ESLOVENIA --- 'ZZ1A8GBAP00842109'      
 
     
-buscar = vehiculosRobados('LBMC25C0900008571')
+buscar = vehiculosRobados('ZZ1A8GBAP00842109')
 buscar.rumania()
 buscar.hungria()
 buscar.eslovenia()
