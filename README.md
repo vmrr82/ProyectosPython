@@ -1,2 +1,3 @@
 # ProyectosPython
-Practicas de ejercicios Python
+
+Ideas,proyectos en lenguaje Python
