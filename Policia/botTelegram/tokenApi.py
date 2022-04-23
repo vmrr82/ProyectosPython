@@ -1,3 +1,3 @@
 
-tokenApi = '5334598261:AAGOzJeE5_JDvLp3o6w0sErBOl09SIl80JU'
+tokenApi = ''
    
