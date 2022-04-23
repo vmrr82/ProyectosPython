@@ -1,3 +1,3 @@
 # ProyectosPython
 
-Ideas,proyectos en lenguaje Python
+Ideas y proyectos realizados en lenguaje Python.
