@@ -3,7 +3,8 @@
 import requests
 from bs4 import BeautifulSoup
 
-def conocerPais(matricula):
+def conocerPais():
+    matricula = input('Introduce la matrícula, por favor: ')
     cookies = dict(cookies_are='working')
     r = requests.get(f'https://www.ofesauto.es/tramites/conocer-la-nacionalidad-de-un-vehiculo-por-su-matricula/?matricula={matricula}',cookies=cookies,timeout=3)
     soup = BeautifulSoup(r.text,'html.parser')
@@ -17,5 +18,4 @@ def conocerPais(matricula):
             prob = probabilidad[x].text
             print(f'Probabilidad: {prob}  Pais:{i.text}'.split())
             contador+=1
-            
-conocerPais('matricula')
+conocerPais()
